@@ -28,7 +28,7 @@ export class Apiservice {
     // Otherwise fetch from API
     return this.httpclient.get(this.URL).pipe(
       tap(data => {
-        // 3️⃣ Store only during SSR
+        // Store only during SSR
         if (isPlatformServer(this.platformId)) {
           this.transferState.set(POLITICIAN_STATE_KEY, data);
         }
