@@ -62,3 +62,4 @@ For more information on using the Angular CLI, including detailed command refere
 ## TODO
 - The api URL to ftdata is hardcoded in apiservice and also still uses regular http...
 - Make focus should be on the navigation page/placeholder app.html and then add some styling for overview.css
+- Make a home page, so /overview isn't the default page that opens

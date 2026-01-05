@@ -1,4 +1,56 @@
-<p>overview works!</p>
-@for (politician of data; track data.id) {
-  <p>{{ politician.firstName }} {{ politician.lastName }}</p>
-}
+ <style>
+ 
+    main {
+        width: 100%;
+        min-height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 1rem;
+        box-sizing: inherit;
+        position: relative;
+    }
+
+    p {
+        align-self: center;
+        font-weight: bold;
+        margin-bottom: 1rem;
+        font-size: 17px;
+    }
+
+    .people-list {
+        max-height: 60vh;           /* limit list height */
+        min-height: 10rem;
+        overflow-y: auto;          /* enable vertical scroll */
+        -webkit-overflow-scrolling: touch; /* smooth scrolling on iOS */
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        padding: 0.5rem;
+    }
+
+    .person-item {
+        padding: 0.5rem 0.75rem;
+        border-radius: 6px;
+        background: white;
+        box-shadow: 0 1px 0 rgba(0,0,0,0.04);
+    }
+
+    /* Optional: make scrollbar slimmer / subtle */
+    .people-list::-webkit-scrollbar { width: 10px; }
+    .people-list::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.12); border-radius: 10px; }
+
+</style>
+
+<main class="main">
+    <p>Select a politician</p>
+
+    <div class="people-list" role="list" aria-label="Politicians list">
+        @for (person of politicians; track person.id) {
+            <div class="person-item" role="listitem">
+            <div class="person-name">{{ person.firstName }} {{ person.lastName }}</div>
+            </div>
+        }
+    </div>
+</main>
