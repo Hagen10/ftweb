@@ -1,6 +1,12 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { Apiservice } from '../apiservice';
 
+interface Person {
+  id: string|number;
+  firstName: string;
+  lastName: string;
+}
+
 @Component({
   selector: 'app-overview',
   imports: [],
@@ -9,10 +15,10 @@ import { Apiservice } from '../apiservice';
 })
 export class Overview implements OnInit {
   apiservice = inject(Apiservice);
-  data: any;
+  politicians: Person[] = [];
   ngOnInit() {
     this.apiservice.getData().subscribe((response) => {
-      this.data = response;
+      this.politicians = response;
     });
   }
 }
