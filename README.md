@@ -66,3 +66,9 @@ For more information on using the Angular CLI, including detailed command refere
 - search bar to quickly locate the right politician is a must
 - I suppose we need some data clean up so these admins and test entries don't appear. Do they have all the same relations with other tables as the actual politicians do?
 - It should also be possible to search for party and then only show party members. We need to retrieve the bio and retrieve party with regex I think. Doesn't seem like there's any other table that contains that information.
+- Not sure if the Person interface should be located elsewhere than Overview now that the Politician component also uses it. Maybe it should be moved to Apiservice so we can get rid of Observable<any> type.
+- what happens if the politician id is not a valid one? we should display something like a notification
+- Add virtual scrolling for better performance
+- It should show just whether it was passed or rejected, then the conclusion summary could show if you hover over it.
+- fix css for politician.html
+- Look into deferred views for the politician vote list, maybe a small loading message would be nice.

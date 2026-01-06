@@ -1,7 +1,8 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { Apiservice } from '../apiservice';
+import { Router } from '@angular/router';
 
-interface Person {
+export interface Person {
   id: string|number;
   firstName: string;
   lastName: string;
@@ -15,6 +16,7 @@ interface Person {
 })
 export class Overview implements OnInit {
   apiservice = inject(Apiservice);
+  router = inject(Router);
   politicians: Person[] = [];
   ngOnInit() {
     this.apiservice.getData().subscribe((response) => {
@@ -24,5 +26,6 @@ export class Overview implements OnInit {
 
   selectPolitician(id: string | number) { 
     console.log('Politician selected: ', id);
+    this.router.navigate(['/politician', id]);
   }
 }

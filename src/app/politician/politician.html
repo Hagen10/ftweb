@@ -1,0 +1,108 @@
+ <style>
+ 
+    main {
+        width: 100%;
+        min-height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 1rem;
+        box-sizing: inherit;
+        position: relative;
+    }
+
+    p {
+        align-self: center;
+        font-weight: bold;
+        margin-bottom: 1rem;
+        font-size: 17px;
+    }
+
+    /* TODO This is no longer being used but is probably better than table-wrapper */
+    .people-list {
+        max-height: 60vh;           /* limit list height */
+        min-height: 10rem;
+        overflow-y: auto;          /* enable vertical scroll */
+        -webkit-overflow-scrolling: touch; /* smooth scrolling on iOS */
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        padding: 0.5rem;
+    }
+
+    /* TODO This is no longer being used but is probably better than table-wrapper */
+    .person-item {
+        padding: 0.5rem 0.75rem;
+        border-radius: 6px;
+        background: white;
+        box-shadow: 0 1px 0 rgba(0,0,0,0.04);
+        font-weight: bold;
+    }
+
+    /* TODO This is no longer being used but is probably better than table-wrapper */
+    .person-item:active {
+        background-color: #ffffff;
+        box-shadow: 0 2px 0 #c3c3c3;
+        transform: translateY(2px);
+    }
+    /* TODO This is no longer being used but is probably better than table-wrapper */
+    /* Optional: make scrollbar slimmer / subtle */
+    .people-list::-webkit-scrollbar { width: 10px; }
+    .people-list::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.12); border-radius: 10px; }
+
+    .table-wrapper {
+        max-height: 60vh;
+        overflow-y: auto;
+        border: 1px solid #ccc;
+    }
+
+    .data-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .data-table th,
+    .data-table td {
+        padding: 8px 10px;
+        text-align: left;
+        border-bottom: 1px solid #eee;
+    }
+
+    .data-table thead th {
+        position: sticky;
+        top: 0;
+        background: #f7f7f7;
+        z-index: 1;
+    }
+
+
+</style>
+<main class="main">
+    <p>{{ politician?.firstName }} {{ politician?.lastName }}</p>
+</main>
+
+<div class="table-wrapper">
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Timestamp</th>
+        <th>Type</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      @for (item of votes; track item.timestamp) {
+            <tr>
+            <td>{{ item.titleShort }}</td>
+            <td>{{ item.timestamp | date:'short' }}</td>
+            <td>{{ item.conclusion }}</td>
+            <td>{{ item.vote }}</td>
+            </tr>
+        }
+    </tbody>
+  </table>
+</div>
+

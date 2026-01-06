@@ -9,10 +9,18 @@ export const POLITICIAN_STATE_KEY = makeStateKey<any>('politicians');
   providedIn: 'root',
 })
 export class Apiservice {
-  private readonly URL = 'http://localhost:10000/api/politicians';
+  private readonly URL = 'http://localhost:10000/api';
   private httpclient = inject(HttpClient);
   private transferState = inject(TransferState);
   private platformId = inject(PLATFORM_ID);
+
+  getPoliticianInfo(id: number): Observable<any> {
+    return this.httpclient.get(this.URL.concat('/politicianInfo/', id.toString()));
+  }
+
+  getPoliticianVotes(id: number): Observable<any> {
+    return this.httpclient.get(this.URL.concat('/politicianVotes/', id.toString()));
+  }
 
   getData(): Observable<any> {
     // If running in the browser and state exists → use it
@@ -27,10 +35,10 @@ export class Apiservice {
       return of(data);
     }
 
-      console.warn('Querying API');
+    console.warn('Querying API');
 
     // Otherwise fetch from API
-    return this.httpclient.get(this.URL).pipe(
+    return this.httpclient.get(this.URL.concat('/politicians')).pipe(
       tap(data => {
         // Store only during SSR
         if (isPlatformServer(this.platformId)) {
