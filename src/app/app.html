@@ -28,6 +28,7 @@
   .topnav {
     overflow: hidden;
     background-color: var(--hot-red);
+    border-radius: 10px;
   }
 
   .topnav p {
@@ -36,7 +37,6 @@
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
-    font-size: 17px;
     margin: 0;
     font-weight: bold;
   }
@@ -53,7 +53,7 @@
 
   /* Change color on hover */
   .topnav a:hover {
-    background-color: #ddd;
+    background-color: #ffffff;
     color: black;
   }
 
@@ -67,7 +67,7 @@
 
 <div class="topnav">
   <p>Folketinget Data</p>
-  <a routerLink="/">Home</a>
+  <a routerLink="/home">Home</a>
   <a routerLink="/overview">Overview</a>
   <a routerLink="/other">Other</a>
 </div>

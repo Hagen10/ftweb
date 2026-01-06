@@ -21,4 +21,8 @@ export class Overview implements OnInit {
       this.politicians = response;
     });
   }
+
+  selectPolitician(id: string | number) { 
+    console.log('Politician selected: ', id);
+  }
 }

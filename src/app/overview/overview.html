@@ -35,6 +35,13 @@
         border-radius: 6px;
         background: white;
         box-shadow: 0 1px 0 rgba(0,0,0,0.04);
+        font-weight: bold;
+    }
+
+    .person-item:active {
+        background-color: #ffffff;
+        box-shadow: 0 2px 0 #c3c3c3;
+        transform: translateY(2px);
     }
 
     /* Optional: make scrollbar slimmer / subtle */
@@ -48,9 +55,9 @@
 
     <div class="people-list" role="list" aria-label="Politicians list">
         @for (person of politicians; track person.id) {
-            <div class="person-item" role="listitem">
-            <div class="person-name">{{ person.firstName }} {{ person.lastName }}</div>
-            </div>
+            <button (click)="selectPolitician(person.id)" class="person-item" role="listitem">
+                {{ person.firstName }} {{ person.lastName }}
+            </button>
         }
     </div>
 </main>

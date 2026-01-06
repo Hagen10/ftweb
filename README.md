@@ -63,3 +63,6 @@ For more information on using the Angular CLI, including detailed command refere
 - The api URL to ftdata is hardcoded in apiservice and also still uses regular http...
 - Make focus should be on the navigation page/placeholder app.html and then add some styling for overview.css
 - Make a home page, so /overview isn't the default page that opens
+- search bar to quickly locate the right politician is a must
+- I suppose we need some data clean up so these admins and test entries don't appear. Do they have all the same relations with other tables as the actual politicians do?
+- It should also be possible to search for party and then only show party members. We need to retrieve the bio and retrieve party with regex I think. Doesn't seem like there's any other table that contains that information.
