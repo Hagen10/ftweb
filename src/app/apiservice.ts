@@ -9,7 +9,7 @@ export const POLITICIAN_STATE_KEY = makeStateKey<any>('politicians');
   providedIn: 'root',
 })
 export class Apiservice {
-  private readonly URL = 'http://localhost:10000/api';
+  private readonly URL = 'http://localhost:8080/api';
   private httpclient = inject(HttpClient);
   private transferState = inject(TransferState);
   private platformId = inject(PLATFORM_ID);
