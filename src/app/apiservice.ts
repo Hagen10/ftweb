@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
-import { inject, Injectable, makeStateKey, PLATFORM_ID, TransferState } from '@angular/core';
-import { Observable, of, tap } from 'rxjs';
+import { inject, Injectable, makeStateKey, PLATFORM_ID } from '@angular/core';
+import { isPlatformServer } from '@angular/common';
+import { Observable } from 'rxjs';
+import { environment } from '../environments/environment';
 
 export const POLITICIAN_STATE_KEY = makeStateKey<any>('politicians');
 
@@ -8,18 +10,34 @@ export const POLITICIAN_STATE_KEY = makeStateKey<any>('politicians');
   providedIn: 'root',
 })
 export class Apiservice {
-  private readonly URL = 'http://ftdata:8080/api';
   private httpclient = inject(HttpClient);
+  private platformId = inject(PLATFORM_ID);
+
+  private getBaseUrl(): string {
+    // For server-side rendering, we need to use the environment apiUrl
+    if (isPlatformServer(this.platformId)) {
+      return environment.apiUrl;
+    }
+    
+    // Client-side: use localhost
+    return 'http://localhost:8080/api';
+  }
 
   getPoliticianInfo(id: number): Observable<any> {
-    return this.httpclient.get(this.URL.concat('/politicianInfo/', id.toString()));
+    console.log('fetching politician info with: ', this.getBaseUrl());
+
+    return this.httpclient.get(this.getBaseUrl().concat('/politicianInfo/', id.toString()));
   }
 
   getPoliticianVotes(id: number): Observable<any> {
-    return this.httpclient.get(this.URL.concat('/politicianVotes/', id.toString()));
+    console.log('fetching politician votes with: ', this.getBaseUrl());
+
+    return this.httpclient.get(this.getBaseUrl().concat('/politicianVotes/', id.toString()));
   }
 
   getData(): Observable<any> {
-    return this.httpclient.get(this.URL.concat('/politicians'));
+    console.log('fetching ALL politicians with: ', this.getBaseUrl());
+
+    return this.httpclient.get(this.getBaseUrl().concat('/politicians'));
   }
 }

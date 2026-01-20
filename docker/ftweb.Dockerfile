@@ -34,12 +34,12 @@ RUN addgroup -g 1001 appuser && adduser -D -u 1001 -G appuser appuser
 RUN chown -R appuser:appuser /app
 USER appuser
 
-# Expose port 4000
-EXPOSE 4000
+# Expose port 4200
+EXPOSE 4200
 
 # Health check
 HEALTHCHECK --interval=30s --timeout=5s --start-period=15s --retries=3 \
-    CMD node -e "require('http').get('http://localhost:4000', (r) => {if (r.statusCode < 200 || r.statusCode >= 500) throw new Error(r.statusCode)})" || exit 1
+    CMD node -e "require('http').get('http://localhost:4200', (r) => {if (r.statusCode < 200 || r.statusCode >= 500) throw new Error(r.statusCode)})" || exit 1
 
 # Run the SSR server
 CMD ["node", "dist/ftweb/server/server.mjs"]
