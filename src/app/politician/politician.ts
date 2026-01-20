@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Person } from '../overview/overview';
 import { Apiservice } from '../apiservice';
@@ -24,8 +24,8 @@ export class Politician implements OnInit {
   id: number = 0;
   route = inject(ActivatedRoute);
   apiservice = inject(Apiservice);
-  politician: Person | undefined;
-  votes: Vote[] = [];
+  politician = signal<Person | undefined>(undefined);
+  votes = signal<Vote[]>([]);
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
@@ -33,11 +33,11 @@ export class Politician implements OnInit {
     });
 
     this.apiservice.getPoliticianInfo(this.id).subscribe((response) => {
-      this.politician = response;
+      this.politician.set(response);
     });
 
     this.apiservice.getPoliticianVotes(this.id).subscribe((response) => {
-      this.votes = response;
+      this.votes.set(response);
     });
   }
 }
