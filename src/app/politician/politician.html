@@ -79,7 +79,7 @@
 
 </style>
 <main class="main">
-    <p>{{ politician?.firstName }} {{ politician?.lastName }}</p>
+    <p>{{ politician()?.firstName }} {{ politician()?.lastName }}</p>
 </main>
 
 <div class="table-wrapper">
@@ -94,7 +94,7 @@
     </thead>
 
     <tbody>
-      @for (item of votes; track item.timestamp) {
+      @for (item of votes(); track item.timestamp) {
             <tr>
             <td>{{ item.titleShort }}</td>
             <td>{{ item.timestamp | date:'short' }}</td>

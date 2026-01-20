@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { Apiservice } from '../apiservice';
 import { Router } from '@angular/router';
 
@@ -17,10 +17,11 @@ export interface Person {
 export class Overview implements OnInit {
   apiservice = inject(Apiservice);
   router = inject(Router);
-  politicians: Person[] = [];
+  politicians = signal<Person[]>([]);
+  
   ngOnInit() {
     this.apiservice.getData().subscribe((response) => {
-      this.politicians = response;
+      this.politicians.set(response);
     });
   }
 

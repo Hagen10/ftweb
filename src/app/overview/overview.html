@@ -54,7 +54,7 @@
     <p>Select a politician</p>
 
     <div class="people-list" role="list" aria-label="Politicians list">
-        @for (person of politicians; track person.id) {
+        @for (person of politicians(); track person.id) {
             <button (click)="selectPolitician(person.id)" class="person-item" role="listitem">
                 {{ person.firstName }} {{ person.lastName }}
             </button>
